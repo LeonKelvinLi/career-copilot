@@ -1,0 +1,29 @@
+{
+  "name": "",
+  "email": "",
+  "linkedin": "",
+  "github": "",
+  "portfolio": "",
+  "location": "",
+  "timezone": "UTC",
+  "target_roles": "",
+  "target_locations": "",
+  "remote_preference": "",
+  "salary_preference": "",
+  "resume_paths": "",
+  "experience_and_education": "",
+  "languages": "",
+  "work_authorization": "",
+  "availability": "",
+  "writing_style": "Natural voice for a finance student in their mid-twenties. Simple words, short sentences, real details. No corporate filler, generic AI phrases, or inflated claims.",
+  "excluded_companies": "",
+  "daily_target": 0,
+  "permissions": {
+    "applications": "Not yet discussed",
+    "profile_edits": "Not yet discussed",
+    "email": "Draft only; ask before sending",
+    "schedule": "Not requested"
+  },
+  "facts": [],
+  "connections": {}
+}

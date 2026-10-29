@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="career-token" content="__CAREER_TOKEN__">
+  <title>Career Copilot</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script>
+</head>
+<body>
+<aside>
+  <a class="brand" href="#home"><span class="mark">c.</span> career copilot</a>
+  <p class="aside-note">Your next chapter,<br>one clear step at a time.</p>
+  <nav aria-label="Main navigation">
+    <button data-page="home" class="active">Overview <span>01</span></button>
+    <button data-page="profile">Your profile <span>02</span></button>
+    <button data-page="applications">Applications <span>03</span></button>
+    <button data-page="tasks">Next steps <span>04</span></button>
+    <button data-page="prompts">Talk to Codex <span>05</span></button>
+  </nav>
+  <div class="local"><span class="dot"></span> Saved on this computer<p>Your accounts stay yours.</p></div>
+</aside>
+<main>
+  <header><span id="date-label">YOUR CAREER WORKSPACE</span><button id="refresh" class="quiet">Refresh ↻</button></header>
+  <p id="notice" role="status" aria-live="polite"></p>
+  <section id="home" class="page">
+    <p class="eyebrow">A LITTLE DIRECTION GOES A LONG WAY</p>
+    <h1 id="greeting">Let’s get you started.</h1>
+    <p class="intro">Your profile, your applications, and what needs you next. All in one place.</p>
+    <div class="stats" id="stats"></div>
+    <div class="split">
+      <article class="card accent"><p class="eyebrow">START HERE</p><h2>Your career assistant lives in Codex.</h2><p>Open this folder in Codex and send the message below. It will ask for your details, help connect your accounts, and build a plan with you.</p><div class="quote" id="setup-prompt"></div><button class="primary" id="copy-setup">Copy setup message</button><p class="fine">This dashboard keeps your records. Codex does the research, writing, and account-connected work.</p></article>
+      <article class="card"><div class="card-heading"><h2>What needs you</h2><button data-page="tasks" class="quiet">See all →</button></div><div id="my-tasks"></div></article>
+    </div>
+    <article class="card"><div class="card-heading"><h2>Recent applications</h2><button data-page="applications" class="quiet">See all →</button></div><div id="recent-apps"></div></article>
+  </section>
+  <section id="profile" class="page" hidden>
+    <p class="eyebrow">THE FACTS BEHIND YOUR STORY</p><h1>Your profile.</h1>
+    <p class="intro">Fill this in yourself, or let Codex build it from your résumé. Leave anything you’re unsure about blank.</p>
+    <form id="profile-form" class="card"><div id="profile-fields" class="form-grid"></div><button class="primary" type="submit">Save profile</button><p class="fine">Account connections and confirmed facts are managed by Codex and preserved when you save here.</p></form>
+  </section>
+  <section id="applications" class="page" hidden>
+    <p class="eyebrow">KEEP THE WHOLE PICTURE</p><h1>Your applications.</h1><p class="intro">A submission counts when there’s a receipt or a clear confirmation from the employer.</p>
+    <details class="card"><summary>Add or update an application</summary><form id="application-form" class="form-grid">
+      <label>Record ID for an update<input name="id" type="number" min="1" placeholder="Leave blank for a new role"></label>
+      <label>Company<input name="company" required></label><label>Role<input name="role" required></label><label>Role URL<input name="url" type="url" required placeholder="https://…"></label>
+      <label>Stage<select name="status" id="app-status"></select></label><label>Verified submission time<input name="submitted_at" placeholder="2026-10-29T14:00:00-07:00"></label>
+      <label class="wide">Original receipt or portal confirmation<input name="submission_evidence" placeholder="Email link or path to your saved evidence"></label>
+      <label class="wide">Latest evidence<input name="evidence" placeholder="For example, a link to an assessment invitation"></label>
+      <label class="wide">Notes<textarea name="notes" rows="3"></textarea></label><div class="wide"><button class="primary" type="submit">Save application</button><button class="quiet" id="reset-app" type="button">Clear form</button></div>
+    </form></details>
+    <div class="filters"><input id="app-search" aria-label="Search applications" placeholder="Search company or role…"><select id="app-filter" aria-label="Filter stage"><option value="">Every stage</option></select></div>
+    <div id="applications-list"></div>
+  </section>
+  <section id="tasks" class="page" hidden>
+    <p class="eyebrow">MAKE ROOM FOR THE NEXT STEP</p><h1>What’s outstanding?</h1><p class="intro">Separate what you need to do from what the assistant can handle and what’s waiting on someone else.</p>
+    <details class="card"><summary>Add a next step</summary><form id="task-form" class="form-grid"><label class="wide">What needs doing?<input name="title" required></label><label>Who’s doing it?<select name="owner"><option value="me">Me</option><option value="assistant">Assistant</option><option value="employer">Employer</option></select></label><label>Due date<input name="due" type="date"></label><label>Application ID, if any<input name="application_id" type="number" min="1"></label><label class="wide">Notes<textarea name="notes" rows="2"></textarea></label><div><button class="primary" type="submit">Add next step</button></div></form></details>
+    <div id="tasks-list"></div>
+  </section>
+  <section id="prompts" class="page" hidden>
+    <p class="eyebrow">JUST ASK, IN YOUR OWN WORDS</p><h1>Talk to Codex.</h1><p class="intro">Copy one of these into your Codex chat. You can also just say what you need.</p><div id="prompt-cards" class="prompt-grid"></div>
+  </section>
+  <footer>CAREER COPILOT <span>Small steps. Real progress.</span></footer>
+</main>
+</body></html>
