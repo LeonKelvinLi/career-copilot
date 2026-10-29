@@ -1,9 +1,17 @@
-# Open this folder in Codex
+# One message to get started
 
-Start a chat in the `career-copilot` project and paste:
+Paste this into a **local Codex chat**:
 
-> Set up Career Copilot for me. Read AGENTS.md and .agents/skills/career-copilot/SKILL.md. Ask me for my own résumé or experience, LinkedIn, target roles, work locations, and preferences. Save my answers locally so I don't have to repeat them. Help me connect my own accounts. Write plainly, in a natural voice for someone in their mid-twenties studying finance, and confirm my actual background. Prepare my résumé review, LinkedIn draft, and job-search plan. Ask once which actions I want you to handle.
+> Set up Career Copilot for me from https://github.com/LeonKelvinLi/career-copilot. Get a local copy, read its AGENTS.md, and follow the onboarding. Handle the technical setup for me. Ask me a few questions at a time, save my answers, and keep the writing natural.
 
-That's it. Codex will ask **you** for the details and guide the next steps. You don't need to configure API keys or give your passwords to anyone. You can start with pasted experience if you don't have a résumé or LinkedIn yet.
+If this folder is already open in Codex, just say:
 
-After setup, try “any replies?” or “what's outstanding?”. Ask Codex to open the optional dashboard if you want to see the tracker.
+> Set up Career Copilot for me.
+
+Codex handles the files and commands when local tools are available. You answer a few questions about yourself and sign into your own accounts when needed. No coding, profile JSON or API keys to configure yourself.
+
+You can start without a résumé or LinkedIn. “Not sure”, “skip”, and “later” are fine. It saves your answers, remembers where you stopped, and learns more while helping you. It starts with your background and goals, then learns your interests, strengths, projects, preferences and writing style.
+
+If your chat can't work with local files, [download the ZIP](https://github.com/LeonKelvinLi/career-copilot/archive/refs/heads/main.zip), unzip it, open the folder as a local Codex project, and use the short message above.
+
+Later, just ask “any replies?” or “what's outstanding?”. The dashboard is optional; ask Codex to open it if you want it.

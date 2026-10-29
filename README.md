@@ -4,22 +4,27 @@ Your own career assistant in Codex: résumé and LinkedIn help, suitable jobs, a
 
 Built for a natural, early-career voice. The starting writing preference is a finance student in their mid-twenties: clear, specific, and human, without corporate filler or made-up experience. The assistant asks for **your** actual background and remembers your answers locally.
 
-![Dashboard with fictional test data](docs/dashboard.png)
+![Dashboard starting screen](docs/dashboard.png)
 
-*Preview uses a fictional candidate and synthetic receipt; no real application was submitted.*
+*Preview shows a local test workspace with no applications or personal account information.*
 
 ## Start in Codex
 
-1. [Download this repo as a ZIP](https://github.com/LeonKelvinLi/career-copilot/archive/refs/heads/main.zip) and unzip it, or clone it:
-   ```sh
-   git clone https://github.com/LeonKelvinLi/career-copilot.git
-   ```
-2. Open the `career-copilot` folder as a project in Codex. Start a chat in that project.
-3. Send:
+**Paste this into a local Codex chat:**
 
-   > Set up Career Copilot for me. Read AGENTS.md and the career-copilot skill. Ask me for my own details and walk me through setup.
+> Set up Career Copilot for me from https://github.com/LeonKelvinLi/career-copilot. Get a local copy, read its AGENTS.md, and follow the onboarding. Handle the technical setup for me. Ask me a few questions at a time, save my answers, and keep the writing natural.
 
-Codex will ask for your résumé (or pasted experience), LinkedIn URL if you have one, target roles, work locations, and preferences. It will build your profile, save your answers, and help you connect your own accounts. You don't need to send those details to the person sharing this repo.
+Codex handles the local files and commands when its session supports them. It should reuse an existing local copy if one is already set up. You answer the questions; you don't need to edit configuration, write code or provide API keys. You'll sign into your own services when a connection is needed.
+
+Already downloaded it? Open the folder in Codex and say **“Set up Career Copilot for me.”** If your chat cannot download or work with local files, [download the ZIP](https://github.com/LeonKelvinLi/career-copilot/archive/refs/heads/main.zip), unzip it, and open that folder as a local Codex project.
+
+## It gets to know you as you go
+
+It starts with what you're studying/working on, what you want next, and where you'd like to work. Then it learns your interests, strengths, real projects, career goals, work preferences, things to avoid and how you write. It asks at most three short questions at a time, saves the answers and remembers where you left off.
+
+No résumé yet? Just describe your background. Not sure about salary or your exact career path? Say so. You can skip questions and come back later. LinkedIn, a writing sample, account connections and the dashboard are optional at the start. You get a useful first draft or plan before finishing every topic.
+
+Your saved priorities shape the jobs it finds and the examples it uses in your résumé, LinkedIn and messages. It checks practical details such as graduation, availability and work authorization when needed, without guessing. You don't need to send your personal details to the person sharing this repo.
 
 If Codex doesn't discover the skill automatically, ask it to read `.agents/skills/career-copilot/SKILL.md` directly. Project guidance and skills are supported through the mechanisms described in the [official Codex customization docs](https://learn.chatgpt.com/docs/customization/overview).
 

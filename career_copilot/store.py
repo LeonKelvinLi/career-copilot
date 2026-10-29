@@ -10,6 +10,7 @@ from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 ROOT = Path(__file__).resolve().parents[1]
 STATUSES = ("discovered", "draft", "blocked", "uncertain", "submitted", "assessment", "interview", "offer", "rejected", "withdrawn")
+ONBOARDING_TOPICS = ("background", "goals", "interests", "strengths", "projects", "work_preferences", "practicalities", "voice", "support", "permissions")
 DEFAULT_PROFILE = {
     "name": "", "email": "", "linkedin": "", "github": "", "portfolio": "",
     "location": "", "timezone": "UTC", "target_roles": "", "target_locations": "",
@@ -17,6 +18,11 @@ DEFAULT_PROFILE = {
     "experience_and_education": "", "languages": "", "work_authorization": "",
     "availability": "", "writing_style": "Natural voice for a finance student in their mid-twenties. Simple words, short sentences, real details. No corporate filler, generic AI phrases, or inflated claims.",
     "excluded_companies": "", "daily_target": 0,
+    "career_goals": "", "interests": "", "strengths": "", "skills_to_build": "",
+    "projects_and_achievements": "", "work_preferences": "", "company_preferences": "",
+    "dealbreakers": "", "writing_sample": "", "practical_constraints": "",
+    "search_context": "", "support_preferences": "",
+    "onboarding": {"status": "not_started", "covered_topics": [], "deferred_topics": [], "next_question": ""},
     "permissions": {"applications": "Not yet discussed", "profile_edits": "Not yet discussed",
                     "email": "Draft only; ask before sending", "schedule": "Not requested"},
     "facts": [], "connections": {},
@@ -99,6 +105,18 @@ def validate_profile(raw):
     for k, v in p["connections"].items():
         text(k, "connection name")
         text(v, "connection description")
+    onboarding = p["onboarding"]
+    if not isinstance(onboarding, dict) or set(onboarding) != set(DEFAULT_PROFILE["onboarding"]):
+        raise ValueError("onboarding needs status, covered_topics, deferred_topics and next_question")
+    if onboarding["status"] not in ("not_started", "in_progress", "ready_to_start"):
+        raise ValueError("Unknown onboarding status")
+    for key in ("covered_topics", "deferred_topics"):
+        topics = onboarding[key]
+        if not isinstance(topics, list) or any(not isinstance(t, str) or t not in ONBOARDING_TOPICS for t in topics) or len(topics) != len(set(topics)):
+            raise ValueError(f"{key} must be a list of unique known onboarding topics")
+    if set(onboarding["covered_topics"]) & set(onboarding["deferred_topics"]):
+        raise ValueError("An onboarding topic cannot be both covered and deferred")
+    onboarding["next_question"] = text(onboarding["next_question"], "next_question")
     return p
 
 
@@ -145,7 +163,9 @@ class Store:
     def profile(self):
         with self.connect() as c:
             row = c.execute("SELECT value FROM meta WHERE key='profile'").fetchone()
-        return json.loads(row[0]) if row else copy.deepcopy(DEFAULT_PROFILE)
+        # Merge new fields into profiles created by older versions without
+        # discarding any previously saved answers or resetting onboarding.
+        return validate_profile(json.loads(row[0])) if row else copy.deepcopy(DEFAULT_PROFILE)
 
     def save_profile(self, raw):
         p = validate_profile(raw)
@@ -158,7 +178,7 @@ class Store:
     def patch_profile(self, raw):
         # The dashboard edits only visible fields. Facts, permissions and account
         # notes may have changed in Codex since the page was opened.
-        allowed = set(DEFAULT_PROFILE) - {"facts", "permissions", "connections"}
+        allowed = set(DEFAULT_PROFILE) - {"facts", "permissions", "connections", "onboarding"}
         if not isinstance(raw, dict) or set(raw) - allowed:
             raise ValueError("Dashboard profile changes must contain editable profile fields")
         with self.connect() as c:

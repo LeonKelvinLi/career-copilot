@@ -38,6 +38,44 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(self.store.state()["applications"], [])
         self.assertEqual(self.store.events(), [])
 
+    def test_personal_context_and_skipped_topics_survive_new_session(self):
+        profile = self.store.profile()
+        profile.update(career_goals="Explore treasury internships", interests="How companies manage cash",
+                       strengths="Explaining group coursework", skills_to_build="Excel",
+                       projects_and_achievements="Class cash-flow comparison; no client work",
+                       work_preferences="Learning and a supportive manager before brand name",
+                       company_preferences="Open to smaller teams", dealbreakers="Unpaid placements",
+                       writing_sample="", practical_constraints="Classes on Tuesday",
+                       search_context="No applications yet", support_preferences="Short updates")
+        profile["onboarding"] = {"status":"ready_to_start", "covered_topics":["background","goals","interests"], "deferred_topics":["voice"], "next_question":"What hours fit around your studies?"}
+        self.store.save_profile(profile)
+        actual = Store(self.temp.name).profile()
+        self.assertEqual(actual, profile)
+        self.assertEqual(actual["work_authorization"], "")
+        self.assertEqual(actual["writing_sample"], "")
+
+    def test_pre_upgrade_profiles_keep_answers_and_gain_new_fields(self):
+        legacy = {"name":"Fictional Existing User", "target_roles":"Finance intern",
+                  "facts":[{"field":"graduation", "value":"June 2027", "source":"test", "confirmed_at":"2026-01-01"}],
+                  "permissions":{"applications":"Draft only"}, "connections":{"email":"Not connected"}}
+        with self.store.connect() as c:
+            c.execute("INSERT INTO meta VALUES('profile',?)", (json.dumps(legacy),))
+        actual = Store(self.temp.name).profile()
+        self.assertEqual(actual["name"], legacy["name"])
+        self.assertEqual(actual["facts"], legacy["facts"])
+        self.assertEqual(actual["permissions"]["applications"], "Draft only")
+        self.assertEqual(actual["career_goals"], "")
+        self.assertEqual(actual["onboarding"]["status"], "not_started")
+
+    def test_invalid_onboarding_progress_is_rejected_without_losing_answers(self):
+        self.store.save_profile({"name":"Existing fictional user"})
+        for covered, deferred in ((["goals"],["goals"]), (["goals","goals"],[]), (["invented"],[]), ([{}],[])):
+            p = self.store.profile()
+            p["onboarding"] = {"status":"in_progress", "covered_topics":covered, "deferred_topics":deferred, "next_question":""}
+            with self.assertRaises(ValueError):
+                self.store.save_profile(p)
+        self.assertEqual(self.store.profile()["name"], "Existing fictional user")
+
     def test_uncertain_does_not_count_and_later_receipt_counts_once(self):
         app_id = self.add(status="uncertain")
         self.assertEqual(self.store.state()["summary"]["verified_total"], 0)
@@ -148,6 +186,8 @@ class ServerTests(unittest.TestCase):
         current["permissions"]["applications"] = "Prepare drafts only"
         current["facts"] = [{"field":"education", "value":"Finance", "source":"test", "confirmed_at":"2026-01-01"}]
         current["target_roles"] = "Treasury internships"
+        current["career_goals"] = "Learn how treasury teams work"
+        current["onboarding"] = {"status":"in_progress", "covered_topics":["goals"], "deferred_topics":["voice"], "next_question":"What interests you about treasury?"}
         self.store.save_profile(current)
         # Only the name differs from the dashboard snapshot, so only it is sent.
         edited = {**stale, "name": "New fictional name"}

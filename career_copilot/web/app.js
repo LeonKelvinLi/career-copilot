@@ -1,7 +1,7 @@
 const token = document.querySelector('meta[name="career-token"]').content;
 const $ = id => document.getElementById(id);
 let state;
-const setupPrompt = 'Set up Career Copilot for me. Read AGENTS.md and the career-copilot skill. Ask me for my own résumé, LinkedIn, target roles, locations, and preferences, then save my answers locally. Help me connect my own accounts. Write in a natural voice, like a finance student in their mid-twenties, and confirm my actual background. Prepare my profile, LinkedIn improvements, and a job-search plan. Ask once what actions I want you to handle.';
+const setupPrompt = 'Set up Career Copilot for me. Read AGENTS.md and follow the onboarding. Handle the technical setup, ask me a few questions at a time, and save my answers. Help me figure out my next steps and keep the writing natural.';
 const prompts = [
   ['Get started', setupPrompt],
   ['Any replies?', 'Check my connected email for application replies, including archived mail, Spam, and Trash if supported. Read the full messages. Separate receipts, assessments, interviews, outreach, and rejections. Save source links and next steps in my tracker. Tell me what you actually checked and any access limits.'],
@@ -13,6 +13,9 @@ const prompts = [
 ];
 const fields = [
   ['name','Full name'],['email','Application email'],['linkedin','LinkedIn URL'],['github','GitHub URL, if useful'],['portfolio','Portfolio or work samples'],['location','Current city and country'],['timezone','Timezone (e.g. America/Sao_Paulo)'],['remote_preference','Remote, hybrid, or in person?'],['target_roles','Target roles',true],['target_locations','Where do you want to work?',true],['salary_preference','Salary preference (include currency and period)',true],['resume_paths','Your current résumé file paths',true],['experience_and_education','Experience and education, with dates',true],['languages','Languages and your actual level',true],['work_authorization','Work authorization and sponsorship by country',true],['availability','Start date, notice, relocation, and schedule',true],['writing_style','How should drafts sound?',true],['excluded_companies','Companies or roles to skip',true],['daily_target','Daily application target (0 = not set)'],
+];
+const contextFields = [
+  ['career_goals','What would you like to do next?',true],['interests','What do you enjoy or want to explore?',true],['strengths','What are you good at? Include real examples.',true],['skills_to_build','What would you like to get better at?',true],['projects_and_achievements','Projects, achievements, and what you personally did',true],['work_preferences','What matters most in a job or team?',true],['company_preferences','Industries or companies you like',true],['dealbreakers','Anything you want to avoid?',true],['practical_constraints','Study hours, travel, or other limits',true],['writing_sample','A short example of your own writing (optional)',true],['search_context','Applications already in progress and what you have tried',true],['support_preferences','What help and update style would suit you?',true],
 ];
 function el(tag, cls, value) { const e=document.createElement(tag);if(cls)e.className=cls;if(value!==undefined)e.textContent=value;return e; }
 function notice(s) { $('notice').textContent=s; }
@@ -46,7 +49,7 @@ function render(){
   $('stats').replaceChildren();[[s.verified_today+(p.daily_target?' / '+p.daily_target:''),'Verified applications today'],[s.verified_total,'Verified applications in total'],[s.my_tasks,'Next steps that need you']].forEach(([n,label])=>{const card=el('div','stat');card.append(el('strong','',n),el('span','',label));$('stats').append(card);});
   const my=$('my-tasks');my.replaceChildren();const mine=state.tasks.filter(t=>!t.done&&t.owner==='me').slice(0,4);mine.forEach(t=>my.append(taskRow(t)));if(!mine.length)empty(my,'Nothing waiting on you in the tracker. A good moment to plan your next step.');
   const recent=$('recent-apps');recent.replaceChildren();state.applications.slice(0,4).forEach(a=>recent.append(appRow(a,false)));if(!state.applications.length)empty(recent,'Your first application will show up here.');
-  $('profile-fields').replaceChildren();fields.forEach(([key,label,wide])=>{const l=el('label',wide?'wide':'',label);const input=el(wide?'textarea':'input');input.name=key;input.value=p[key];if(wide)input.rows=3;if(key==='daily_target'){input.type='number';input.min=0;input.max=100;}l.append(input);$('profile-fields').append(l);});
+  for(const [id,items] of [['profile-fields',fields],['context-fields',contextFields]]){$(id).replaceChildren();items.forEach(([key,label,wide])=>{const l=el('label',wide?'wide':'',label);const input=el(wide?'textarea':'input');input.name=key;input.value=p[key];if(wide)input.rows=3;if(key==='daily_target'){input.type='number';input.min=0;input.max=100;}l.append(input);$(id).append(l);});}
   const tasks=$('tasks-list');tasks.replaceChildren();for(const owner of ['me','assistant','employer']){const card=el('article','card');card.append(el('h2','',{me:'Needs you',assistant:'The assistant can handle',employer:'Waiting on employers'}[owner]));const rows=state.tasks.filter(t=>t.owner===owner);rows.forEach(t=>card.append(taskRow(t)));if(!rows.length)empty(card,'No next steps recorded.');tasks.append(card);}
   renderApps();
 }

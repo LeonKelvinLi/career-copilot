@@ -20,13 +20,15 @@ The agent's follow-up review found that an older open dashboard could overwrite 
 
 ## Automated and browser checks
 
-`python3 -m unittest discover -s tests -v`: **15 tests passed**. Tests cover profile persistence, receipt/date and count invariants, role identity and deduplication, separate assessment tasks, validation, local HTTP profile saves, preservation of concurrent Codex updates, rejection of cross-origin and unauthenticated requests, and inability to serve private/arbitrary files.
+`python3 -m unittest discover -s tests -v`: **18 tests passed**. Tests cover profile persistence, receipt/date and count invariants, role identity and deduplication, separate assessment tasks, validation, local HTTP profile saves, preservation of concurrent Codex updates, rejection of cross-origin and unauthenticated requests, and inability to serve private/arbitrary files. The expanded onboarding also has checks for personal context and deferred topics surviving a new session, existing profiles gaining new fields without losing answers, invalid progress being rejected, and dashboard edits preserving newer onboarding progress.
 
 `node --check career_copilot/web/app.js`: passed. The bundled skill-creator validator also passed for `.agents/skills/career-copilot`.
 
-The dashboard was opened in Chrome against isolated fictional data. Actual browser interactions saved a profile, reloaded persisted answers, added an uncertain application, linked and completed a candidate task, edited the existing application with a clearly synthetic receipt, and verified one counted submission with no remaining candidate tasks. The profile-save flow was rechecked after the concurrency fix. `dashboard.png` is a screenshot of that fictional test; no personal account data appears in it.
+The dashboard was opened in Chrome against isolated fictional data. Actual browser interactions saved a profile, reloaded persisted answers, added an uncertain application, linked and completed a candidate task, edited the existing application with a clearly synthetic receipt, and verified one counted submission with no remaining candidate tasks. The profile-save flow was rechecked after the concurrency fix. For the expanded onboarding, browser interactions opened the optional personal-context section, saved goals/work priorities/dealbreakers, and confirmed they survived a reload. `dashboard.png` shows the updated starting screen from a local test workspace with no applications or personal account data.
 
 ## Limits
+
+The simplified setup starts with a message pasted into a local Codex chat. Downloading and local setup depend on that chat having local tools; opening an extracted ZIP as a Codex project is the documented fallback. No fresh Codex-client installation was launched to verify that bootstrap end to end. A missing Python runtime can defer the tracker/dashboard while Codex saves a private draft profile and continues the conversation.
 
 The tests do not establish that a particular user's Codex plan or device has Gmail, LinkedIn browser control, calendar, document tools or scheduling access. Those must be discovered and authenticated in that user's own session. No live email was read, no LinkedIn profile edited, no employer form submitted, and no recurring schedule created for the fictional candidate.
 

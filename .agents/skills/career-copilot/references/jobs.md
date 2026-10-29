@@ -2,6 +2,8 @@
 
 Read profile, permissions, current résumé and tracker first. Target roles come from this candidate's preferences, not the creator's engineering background. A finance student might target internships or analyst roles, but ask rather than assuming a specialty.
 
+Use the deeper profile in actual selection: goals and interests inform role directions; work/company preferences and dealbreakers inform filtering; real projects and strengths supply relevant examples; skills-to-build identify learning opportunities without pretending the skill already exists. Explain a match using those details. If the user is exploring, offer a few directions and the reason for each. Never turn an inferred interest into confirmed experience or silently ignore their priorities to fill a quota.
+
 For each candidate job, verify the live employer posting, location eligibility (including where remote work is allowed), required experience, education and language, type of employment, salary currency/period if published, deadlines and the correct application route. Third-party “worldwide” tags do not override official country restrictions. Preserve current residence versus future relocation. Do not infer work authorization, citizenship or sponsorship from name, school or residence. Financial job research is not personalized investment advice.
 
 Deduplicate by employer role ID and URL, including prior tracker/history and receipt emails. The CLI removes tracking query parameters but cannot identify every redirected alias: also compare company, title and job IDs manually. Separate roles at one company remain separate applications. Prefer suitable roles over filling a daily quota. Explain when there are fewer good matches than requested; never invent submissions.
