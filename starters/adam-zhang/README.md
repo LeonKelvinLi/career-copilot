@@ -2,9 +2,11 @@
 
 Paste this into a local Codex chat:
 
-> Set up Career Copilot for me from https://github.com/LeonKelvinLi/career-copilot using the Adam Zhang starter. Read AGENTS.md and starters/adam-zhang/README.md. Use the saved LinkedIn background, ask me only for what needs confirming or is missing, and handle the technical setup. Keep the writing natural.
+> I'm Adam Zhang. Set up Career Copilot for me from https://github.com/LeonKelvinLi/career-copilot using my Adam Zhang starter. Read AGENTS.md and my starter guide. Use my saved LinkedIn background and ask only what needs confirming or is missing. Also help me install and connect the official Chrome browser extension, guide me through any clicks or sign-ins, and verify it works. Handle the technical setup, save my answers, and keep the writing natural.
 
-Already in this project? Say **“Set this up for me using the Adam Zhang starter.”**
+Already in this project? Say **“Set this up for me using the Adam Zhang starter, and help connect my Chrome browser.”**
+
+[Chrome setup](../../docs/chrome-setup.md) is included in the full message above. Installation and sign-in happen on Adam's own computer; this repository does not supply a browser connection.
 
 ## Instructions for Codex
 

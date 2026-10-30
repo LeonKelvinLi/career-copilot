@@ -2,13 +2,15 @@
 
 Paste this into a **local Codex chat**:
 
-> Set up Career Copilot for me from https://github.com/LeonKelvinLi/career-copilot. Get a local copy, read its AGENTS.md, and follow the onboarding. Handle the technical setup for me. Ask me a few questions at a time, save my answers, and keep the writing natural.
+> Set up Career Copilot for me from https://github.com/LeonKelvinLi/career-copilot. Get a local copy, read its AGENTS.md, and follow the onboarding. Handle the technical setup for me, including helping connect the official Chrome browser extension and verifying it works. Guide me through any clicks or sign-ins I need to do. Ask me a few questions at a time, save my answers, and keep the writing natural.
 
 If this folder is already open in Codex, just say:
 
 > Set up Career Copilot for me.
 
 **For Adam:** [your prepared setup message is here](starters/adam-zhang/README.md). It uses your sourced LinkedIn background so you don't need to retype your whole history. You still confirm what's current and choose your own next steps.
+
+The [Chrome connection guide](docs/chrome-setup.md) is included. Install/permission prompts and your own sign-ins happen on your computer.
 
 Codex handles the files and commands when local tools are available. You answer a few questions about yourself and sign into your own accounts when needed. No coding, profile JSON or API keys to configure yourself.
 
