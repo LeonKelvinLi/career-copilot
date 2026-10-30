@@ -26,7 +26,13 @@ The agent's follow-up review found that an older open dashboard could overwrite 
 
 The dashboard was opened in Chrome against isolated fictional data. Actual browser interactions saved a profile, reloaded persisted answers, added an uncertain application, linked and completed a candidate task, edited the existing application with a clearly synthetic receipt, and verified one counted submission with no remaining candidate tasks. The profile-save flow was rechecked after the concurrency fix. For the expanded onboarding, browser interactions opened the optional personal-context section, saved goals/work priorities/dealbreakers, and confirmed they survived a reload. `dashboard.png` shows the updated starting screen from a local test workspace with no applications or personal account data.
 
-## Limits
+## Expanded onboarding and Adam starter
+
+The independent agent also completed eight isolated CLI checks for deeper onboarding, deferred writing samples, restart continuity and old-profile compatibility. Its dialogue rehearsal produced useful early drafts without a résumé or accounts, used the candidate's learning/support priorities, and kept unknown tools and work authorization unknown. This was a fictional-candidate rehearsal, not Adam's own answers.
+
+The optional Adam starter was assembled from the supplied LinkedIn profile and its visible education, certification and skills pages on October 29, 2026. Schema validation and an actual isolated CLI import/read in fresh processes passed. The check confirmed that sourced details persist, target preferences and eligibility stay blank, permissions remain unset, and no account connection or application receipt is fabricated. The generic default profile stays blank. LinkedIn-listed claims are explicitly attributed; degrees, current license status, personal project contribution and simulation metrics are not independently verified by these tests.
+
+## Deployment and account limits
 
 The simplified setup starts with a message pasted into a local Codex chat. Downloading and local setup depend on that chat having local tools; opening an extracted ZIP as a Codex project is the documented fallback. No fresh Codex-client installation was launched to verify that bootstrap end to end. A missing Python runtime can defer the tracker/dashboard while Codex saves a private draft profile and continues the conversation.
 

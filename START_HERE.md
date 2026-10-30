@@ -8,6 +8,8 @@ If this folder is already open in Codex, just say:
 
 > Set up Career Copilot for me.
 
+**For Adam:** [your prepared setup message is here](starters/adam-zhang/README.md). It uses your sourced LinkedIn background so you don't need to retype your whole history. You still confirm what's current and choose your own next steps.
+
 Codex handles the files and commands when local tools are available. You answer a few questions about yourself and sign into your own accounts when needed. No coding, profile JSON or API keys to configure yourself.
 
 You can start without a résumé or LinkedIn. “Not sure”, “skip”, and “later” are fine. It saves your answers, remembers where you stopped, and learns more while helping you. It starts with your background and goals, then learns your interests, strengths, projects, preferences and writing style.

@@ -4,7 +4,9 @@ This repository reproduces a personal career-assistant workflow inside Codex. St
 
 ## First session
 
-When the user says “set this up”, “get started”, or similar, run the onboarding workflow. Ask **this user** for their details; never request their friend's details. The repository intentionally contains no candidate identity. Read existing local state first with `python3 career.py profile show` and `python3 career.py status`. Do not ask again for confirmed answers.
+When the user says “set this up”, “get started”, or similar, run the onboarding workflow. Ask **this user** for their details; never request their friend's details. The default profile starts blank; named starters are used only when explicitly selected for that person. Read existing local state first with `python3 career.py profile show` and `python3 career.py status`. Do not ask again for confirmed answers.
+
+An optional sourced starter is available at `starters/adam-zhang/README.md`. Use it only for a user identifying as Adam or explicitly requesting Adam's starter, and follow its import/merge instructions. Generic setup stays blank for everyone else. Read source qualifications and confirm current facts without repeating the whole history. Candidate answers and connected accounts always stay private.
 
 Follow `.agents/skills/career-copilot/references/onboarding.md` for a short conversation that learns this person's background, interests, strengths, goals, projects, work preferences, practical constraints and voice. Ask at most three short questions at a time; read supplied material first. A résumé, LinkedIn, salary number and connected accounts are optional at the start. Accept “skip”, “later” and “not sure”. Save answers and onboarding progress after each batch, and resume without repeating covered or deferred topics. Start useful drafts early rather than requiring a completed questionnaire. Leave unknown facts blank. Do not copy the creator's personal memory into this candidate's profile.
 

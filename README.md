@@ -18,6 +18,8 @@ Codex handles the local files and commands when its session supports them. It sh
 
 Already downloaded it? Open the folder in Codex and say **“Set up Career Copilot for me.”** If your chat cannot download or work with local files, [download the ZIP](https://github.com/LeonKelvinLi/career-copilot/archive/refs/heads/main.zip), unzip it, and open that folder as a local Codex project.
 
+**Adam:** use [your prepared starter](starters/adam-zhang/README.md). It includes dated LinkedIn background, so you can confirm what's current instead of typing your whole history again. It won't assume you're still a student or looking for an internship. Other users start with an empty profile.
+
 ## It gets to know you as you go
 
 It starts with what you're studying/working on, what you want next, and where you'd like to work. Then it learns your interests, strengths, real projects, career goals, work preferences, things to avoid and how you write. It asks at most three short questions at a time, saves the answers and remembers where you left off.
